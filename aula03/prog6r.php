@@ -2,30 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/estilo.css">
     <title>Document</title>
 </head>
 <body>
     <div>
-        <h3>Numeros</h3>
+        <h3>Teste</h3>
         <?php 
             $num1=$_POST["num1"];
-            $num2=$_POST["num2"];
-            $num3=$_POST["num3"];
-            
-            if( $num1>$num2 && $num1>$num3){
-                printf("Número N1: $num1 é maior que N2: $num2 e N3: $num3");
-            }elseif($num2>$num1 && $num2>$num3){
-                printf("Número N2: $num2 é maior que N1: $num1 e N3: $num3");
+
+            if($num1>0){
+                if($num1>10){
+                    echo "<H1>VÁLIDO</H1>";
+                }
+                echo "<H1>POSITIVO</H1>";
             }else{
-                printf("Número N3: $num3 é maior que N1: $num1 e N2: $num2");
+                echo "<H1>NÚMERO É ZERO OU NEGATIVO</H1>";
             };
-            
         
-        ?><br>
-        <a href="prog6.php">VOLTAR</a>
+            // if($num1<0 || $num1>10){
+            //     echo "<h1 style='text-align:center'>Inválido!</h1>";
+            // }else{
+            //     echo "<h1 style='text-align:center'>Válido!</h1>";
+            // };
+        ?><BR>
+        <a href="Prog6.php">VOLTAR</a>
     </div>
+    
 </body>
 </html>

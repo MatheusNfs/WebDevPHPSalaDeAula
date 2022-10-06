@@ -20,9 +20,11 @@
                 printf("O total a ser pago é ".$valor*0.9." reais<br><br>");
             };
             if($pag=="parc"){
-                printf("O total a ser pago é $totalparc reais em $vezes vezes<br><br>");
-                printf("O valor da parcela é ". $totalparc/$vezes." reais<br><br>");
-            }
+                echo "O total a ser pago é ". number_format($totalparc, 2, ",","."); 
+                echo " reais em $vezes vezes";
+                echo "<br>";
+                echo "O valor da parcela é ". $totalparc/$vezes." reais<br><br>";
+            };
         
         ?><br>
         <a href="prog7.php">VOLTAR</a>

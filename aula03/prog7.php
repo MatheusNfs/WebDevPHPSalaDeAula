@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,10 +10,15 @@
 <body>
     <div>
         
-        <h1>Programa Seis</h1>
-        <form action="prog6r.php" method="post">
-            <h3>Coloque um número:</h3><br>
-            <input type="number" name="num1"><br>
+        <h1>Programa Sete</h1>
+        <form action="prog7r.php" method="post">
+            <h3>Coloque três números:</h3><br>
+            N1:<br>
+            <input type="number" name="num1"><br><br>
+            N2:<br>
+            <input type="number" name="num2"><br><br>
+            N3:<br>
+            <input type="number" name="num3"><br><br>
             <input type="submit" name="Verificar"><br>
         </form>
     <?php 
