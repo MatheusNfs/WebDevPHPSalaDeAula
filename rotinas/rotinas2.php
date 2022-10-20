@@ -19,31 +19,34 @@
         <pre> 
 
         <?php 
-            include "funcoes.php";
-            breakline(1);
-            write_text("<p style='text-align:center';>ESTE TEXTO FOI PREDITO PELO MUAD'DIB!</p>");
-            breakline(1);
-            escreva_texto();
-            today();
-            echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-            breakline(2);
-            echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-            breakline(2);
-            
-            soma(1,2);
-            breakline(1);
-            
-            soma2(10, 3, 2, 5, 12, 23);
-            breakline(1);
-            
-            sub(4,2);
-            breakline(1);
-            
-            mult(2,3);
-            breakline(1);
-            
-            div(0, 10);
+            include "funcoes2.php";
 
+            $text = write_text("Esse texto retorna a Arrakis através de return");
+            echo $text."<br>";
+            
+            $n1 = 2;
+            $n2 = 4;
+
+            $rsum = soma($n1, $n2);
+            echo "resultado da soma-sum é $rsum <br>";
+            
+            $rsumv = somaV($n1, $n2);
+            echo "resultado da soma-sumV é $rsumv <br>";
+
+            $rsoma = soma(2,3);
+            echo "resultado da soma é $rsoma <br>";
+            
+            $rsoma2 = soma2(2,3,4,5);
+            echo "resultado da soma2 é $rsoma2 <br>";
+            
+            $rdiv = div(5,0);
+            echo "resultado da divisão é: $rdiv <br>";
+
+            $rmult = mult(10,2);
+            echo "resultado da divisão é $rmult <br>";
+
+            $rsub = sub(10, 4);
+            echo "resultado da subtração é $rsub";
         ?>
         </pre>
     </div>
