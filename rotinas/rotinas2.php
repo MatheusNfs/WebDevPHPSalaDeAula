@@ -17,21 +17,24 @@
         <h4 style="text-align:center;">Testando Funções</h4>
         <hr>
         <pre> 
-
         <?php 
-            include "funcoes2.php";
-
-            $text = write_text("Esse texto retorna a Arrakis através de return");
-            echo $text."<br>";
+            require_once "funcoes2.php";
+            $text = write_text("Esse texto chega em Arrakis através de return");
+            echo $text."<br> e require_once! <br><br>";
             
             $n1 = 2;
             $n2 = 4;
+            echo "n1 = $n1 e n2 = $n2 <br>";
 
             $rsum = soma($n1, $n2);
+            echo "----------Passagem por Valor-----------<br>";
             echo "resultado da soma-sum é $rsum <br>";
+            echo "n2 $n2 <br>";
             
             $rsumv = somaV($n1, $n2);
+            echo "----------Passagem por Referência-----------<br>";
             echo "resultado da soma-sumV é $rsumv <br>";
+            echo "num2 $n2 <br>";
 
             $rsoma = soma(2,3);
             echo "resultado da soma é $rsoma <br>";

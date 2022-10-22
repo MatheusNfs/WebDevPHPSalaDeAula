@@ -2,16 +2,16 @@
 //Funções em PHP (possuem retorno)
 function write_text($any){
     return $any;
-    $teste=0;
-    $teste++;
+
 }
 function soma($n1, $n2){
     $r=$n1+$n2;
+    $n2=15;
     return $r;
 }
-function somaV($n1, &$n2){
-    $n2=15;
-    $r=$n1+$n2;
+function somaV($n1, &$num2){
+    $r=$n1+$num2;
+    $num2=15;
     return $r;
 }
 function soma2(){
