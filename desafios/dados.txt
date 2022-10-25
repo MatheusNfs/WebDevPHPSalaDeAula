@@ -1,0 +1,28 @@
+Dados do Aluno - Cadastro realizado em: 24/102022 as 21:05:50
+Nome: Thufir Hawat
+CPF: 878.954.561-22
+E-mail: thufirhawat.mentat@houseatreides.caladan.arrakis
+Telefone: 7895423456123
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 24/102022 as 21:08:23
+Nome: Gurney Halleck
+CPF: 789.456.123-00
+E-mail: gurn_hall.manatarms@houseatreides
+Telefone: 785463231
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 24/102022 as 21:09:24
+Nome: Ducan Idaho
+CPF: 123.457.895-62
+E-mail: duncanidaho.pilot@houseatreides
+Telefone: 7732348485
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 24/102022 as 21:12:17
+Nome: Lady Jessica
+CPF: 159.753.194-56
+E-mail: jessica.lady@benegesserit.atreides
+Telefone: 78221354245
+---------------------------------------
+
