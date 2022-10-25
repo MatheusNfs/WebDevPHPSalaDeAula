@@ -61,9 +61,9 @@
             breakline(2);
             
             echo "Função explode( )";
-            $birthday = "00/00/10175";
-            $vetor = explode("/", $birthday);
             breakline(1);
+            $birthday = "00/00/75";
+            $vetor = explode("/", $birthday);
             print_r($vetor);
             breakline(2);
             
@@ -136,10 +136,91 @@
             echo "Função str_replace";
             breakline(1);
             echo "Retorna um novo texto alterando a palavra: ".str_replace("Madhi", "Lisan Al-Gaib", $nome);
+            breakline(2);
+            
+            $cpf = "00.000.000-00";
+            $cpfr = str_replace(".","", $cpf);
+            echo $cpfr;
+            breakline(1);
+            $cpfn = str_replace("-","",$cpfr);
+            echo $cpfn;
+            breakline(1);
+            $cpfv = str_split($cpfn);
+            print_r($cpfv);
 
+            // $cpf = "157.542.367-00";
 
+    
+            // $cpfr = str_replace(".","",$cpf);
+            // $cpfn = str_replace("-","",$cpfr);
+            // $cpf_v = str_split($cpfn);
+            
+            // print_r($cpf_v);
+      
+            // $i=0;
+            // $mult = 10;
+            // $total = 0;
+            
+            // $i2=0;
+            // $mult2 = 11;
+            // $total2 = 0;
 
+            // while($mult>1){
+            //     $total = $total + ($cpf_v[$i]*$mult);
+            //     $mult--;
+            //     $i++;
+            // };
+            // breakline(1);
+            // echo "total 1 = ".$total."<br>";
+            
+            // $resto = $total % 11;
+            
+            // echo "resto 1 = $resto<br>";
 
+            // if($resto<2){
+            //     if($cpf_v[9]==0){
+            //         echo "$cpf_v[9] está certo <br>";
+            //     }else{
+            //         echo "cpf inválido <br>";
+            //     }
+            // }else{
+            //     $check1 = 11 - $resto;
+            //     echo "$check1 = 11 - $resto<br>";
+            //     if($cpf_v[9]==$check1){
+            //         echo "primeiro dígito OK<br>";
+            //     }else{
+            //         echo "cpf invalido<br>";
+            //     }
+            // }
+            // /////////////////////////////////////
+            // while($mult2>1){
+            //     $total2 = $total2 + ($cpf_v[$i2]*$mult2);
+            //     $mult2--;
+            //     $i2++;
+            // };
+            // echo "total 2 = $total2<br>";
+            // $resto2 = $total2 % 11;
+            // echo "resto 2 = $resto2.<br>";
+
+            // if($resto2<2){
+            //     if($cpf_v[10]==0){
+            //         echo "$cpf_v[10] está certo <br>";
+            //     }else{
+            //         echo "cpf inválido <br>";
+            //     }
+            // }else{
+            //     $check2 = 11 - $resto2;
+            //     echo "Check 2 = 11 - $resto2 = $check2<br>";
+            //     if($cpf_v[10]==$check2){
+            //         echo "primeiro dígito OK<br>";
+            //     }else{
+            //         echo "cpf invalido<br>";
+            //     }
+            // }
+
+            
+            
+            	
 
         ?>
     </div>

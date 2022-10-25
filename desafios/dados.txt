@@ -26,3 +26,38 @@ E-mail: jessica.lady@benegesserit.atreides
 Telefone: 78221354245
 ---------------------------------------
 
+Dados do Aluno - Cadastro realizado em: 25/102022 as 18:14:19
+Nome: Matheus N.
+CPF: 157.542.367-78
+E-mail: matheus@matheus
+Telefone: 754865466341
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 25/102022 as 18:14:36
+Nome: Matheus N.
+CPF: 157.542.367-00
+E-mail: matheus@matheus
+Telefone: 754865466341
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 25/102022 as 18:28:15
+Nome: Matheus
+CPF: 000.000.000-00
+E-mail: matheus@matheus
+Telefone: 456369
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 25/102022 as 18:37:10
+Nome: Joãozinho
+CPF: 157.542.367-78
+E-mail: joao@joao
+Telefone: 78945
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 25/102022 as 18:37:48
+Nome: Joãozinho
+CPF: 145.382.206-20
+E-mail: joao@joao
+Telefone: 78945
+---------------------------------------
+
