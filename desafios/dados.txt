@@ -61,3 +61,31 @@ E-mail: joao@joao
 Telefone: 78945
 ---------------------------------------
 
+Dados do Aluno - Cadastro realizado em: 26/102022 as 18:26:24
+Nome: Matheus
+CPF: 111.111.111-11
+E-mail: thufirhawat.mentat@houseatreides.caladan.arrakis
+Telefone: 7895423456123
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 26/102022 as 18:26:43
+Nome: Matheus
+CPF: 999.999.999-99
+E-mail: thufirhawat.mentat@houseatreides.caladan.arrakis
+Telefone: 7895423456123
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 26/102022 as 18:27:24
+Nome: Matheus
+CPF: 083.926.077-67
+E-mail: thufirhawat.mentat@houseatreides.caladan.arrakis
+Telefone: 7895423456123
+---------------------------------------
+
+Dados do Aluno - Cadastro realizado em: 26/102022 as 19:05:58
+Nome: Stilgar
+CPF: 157.542.367-78
+E-mail: stilgar@arrakisdesert.fre
+Telefone: 7732348485
+---------------------------------------
+

@@ -24,10 +24,10 @@ function verifica_cpf($cpf){
         $mult--;
         $i++;
     };
-    
-    if($total==0){
-        $resultf = false;
-    }else{
+    for($index=0; $index<=10; $index++){
+        if($cpf_v[$index] == $cpf_v[$index+1]){
+            $resultf = false;
+        }else{
         $resto = $total % 11;
         if($resto<2){
             if($cpf_v[9]==0){
@@ -71,7 +71,10 @@ function verifica_cpf($cpf){
         }
         if($result1 == true && $result2 == true){
             $resultf = true;
+        }else{
+            $resultf = false;
         }
     }
     return $resultf;
+}
 }  
