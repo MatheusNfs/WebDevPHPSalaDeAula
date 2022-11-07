@@ -48,6 +48,7 @@
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
 
 
+							<a href="cadastroFuncionario.php">Crie cadastro de Funcionário</a>
 							<a href="cadastroCliente.php">Crie o seu CADASTRO</a>
 						</div>
 						<div class="modal-footer">
