@@ -42,11 +42,11 @@
 			$dataNascimento = isset($_POST["nascimento"]) ? $_POST["nascimento"] : "";
 			$cpf = isset($_POST["cpf"]) ? $_POST["cpf"] : "";
 			$estadoCivil = isset($_POST["estado_civil"]) ? $_POST["estado_civil"] : "";
-			$sexo = isset($_POST["sexo"]) ? $_POST["sexo"] : "";
+		
 			$tipo = isset($_POST["tipo"]) ? $_POST["tipo"] : "";
 			$telefone = isset($_POST["telefone"]) ? $_POST["telefone"] : "";
 			$email = isset($_POST["email"]) ? $_POST["email"] : "";
-			$senha = isset($_POST["senha"]) ? $_POST["senha"] : "";
+			$senha = isset($_POST["senha"]) ? password_hash($_POST["senha"], PASSWORD_DEFAULT) : "";
 			$ativo = isset($_POST["ativo"]) ? $_POST["ativo"] : true;
 
 			if(isset($_POST["nome"]) && isset($_POST["senha2"])){
@@ -56,7 +56,6 @@
 					$dataNascimento,
 					$cpf,
 					$estadoCivil,
-					$sexo,
 					$tipo,
 					$telefone,
 					$email,
@@ -64,7 +63,7 @@
 					$ativo
 				);
 				
-				$sql_code = "INSERT INTO funcionario  VALUES (NULL, '$nome', '$dataNascimento', '$cpf', '$estadoCivil', '$sexo', '$tipo','$telefone', '$email', '$senha', true)";
+				$sql_code = "INSERT INTO funcionario  VALUES (NULL, '$nome', '$dataNascimento', '$cpf', '$estadoCivil', '$tipo','$telefone', '$email', '$senha', true)";
 				$sql_query = $conexao->query($sql_code);
 			}
 			
@@ -103,33 +102,14 @@
 					<label for="estadoc" class="form-label">Estado civil</label>
 					<select class="form-select" id="estadoc" name="estado_civil" required>
 						<option selected disabled value="">Selecione</option>
-						<option value="Solterio">Solterio(a)</option>
+						<option value="Solterio">Solteiro(a)</option>
 						<option value="Casado">Casado(a)</option>
 						<option value="Divorciado">Divorciado(a)</option>
 						<option value="Viuvo">Viuvo(a)</option>
 					</select>
 				</div>
-				<div class="col-md-6 col-sm-12">
-					<label class="form-label">Sexo</label><br>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="sexo" id="sexo_id1" value="M">
-						<label class="form-check-label" for="sexo_id1">
-							Masculino
-						</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="sexo" id="sexo_id2" value="F">
-						<label class="form-check-label" for="sexo_id2">
-							Feminino
-						</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="sexo" id="sexo_id3" value="O">
-						<label class="form-check-label" for="sexo_id3">
-							Outros
-						</label>
-					</div>
-				</div>
+				
+			
 				<div class="col-md-6 col-sm-12">
 					<label class="form-label">Tipo de Funcionário</label><br>
 					<div class="form-check form-check-inline">

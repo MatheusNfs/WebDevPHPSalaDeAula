@@ -6,21 +6,19 @@ class Funcionario {
     private string $dataNascimento;
     private string $cpf;
     private string $estadoCivil;
-    private string $sexo;
     private string $tipo;
     private string $telefone;
     private string $email;
     private string $senha;
     private bool $ativo;
 
-    public function __construct(int $idFuncionario, string $nome, string $dataNascimento, string $cpf, string $estadoCivil,string $sexo, string $tipo, string $telefone, string $email, string $senha, bool $ativo){
+    public function __construct(int $idFuncionario, string $nome, string $dataNascimento, string $cpf, string $estadoCivil, string $tipo, string $telefone, string $email, string $senha, bool $ativo){
         
         $this->idFuncionario = $idFuncionario;
         $this->nome = $nome;
         $this->dataNascimento = $dataNascimento ;
         $this->cpf = $cpf;
         $this->estadoCivil = $estadoCivil ;
-        $this->sexo = $sexo;
         $this->tipo = $tipo;
         $this->telefone = $telefone;
         $this->email = $email;
@@ -85,15 +83,6 @@ class Funcionario {
         $this->estadoCivil = $estadoCivil;
     }
 
-    public function getSexo(): string
-    {
-        return $this->sexo;
-    }
-
-    public function setSexo(string $sexo): void
-    {
-        $this->sexo = $sexo;
-    }
     public function getTipo(): string
     {
         return $this->tipo;
