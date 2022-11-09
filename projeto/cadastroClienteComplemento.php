@@ -4,17 +4,77 @@
 <?php 
     require "html/head.php"; 
     require_once "src/protect.php";
-?>
+    
+    ?>
+<script>
+    
+    </script>
 </head>
-	<!--  -->
-	<body>
-		<?php include "html/header.php" ?>
-		<main>
-
-            <?php 
+<!--  -->
+<body>
+    
+    <?php include "html/header.php" ?>
+    <main>
+        
+        <?php 
             $idCliente = $_SESSION['id'];
             $nomeCliente = $_SESSION['nome'];
             echo "ID: $idCliente - Cliente: $nomeCliente"; 
+            
+            require_once "src/conexao.php";
+            require_once "src/model/Endereco.php";
+            
+			$idEndereco = isset($_POST["id"]) ? $_POST["id"] : 0;
+			$tipo = isset($_POST["tipo"]) ? $_POST["tipo"] : "";
+			$logradouro = isset($_POST["logradouro"]) ? $_POST["logradouro"] : "";
+			$numero = isset($_POST["numero"]) ? $_POST["numero"] : "";
+			$complemento = isset($_POST["complemento"]) ? $_POST["complemento"] : "";
+            
+			$bairro = isset($_POST["bairro"]) ? $_POST["bairro"] : "";
+			$cidade = isset($_POST["cidade"]) ? $_POST["cidade"] : "";
+			$estado = isset($_POST["estado"]) ? $_POST["estado"] : "";
+			$cep = isset($_POST["cep"]) ? $_POST["cep"] : "";
+            
+			if(isset($_POST["logradouro"]) && isset($_POST["cep"])){
+                $endereco = new Endereco(
+                    $idEndereco,
+					$idCliente,
+					$tipo,
+					$logradouro,
+					$numero,
+					$complemento,
+					$bairro,
+					$cidade,
+					$estado,
+					$cep
+				);
+				
+				$sql_code = "INSERT INTO endereco VALUES (NULL, '$idCliente', '$tipo', '$logradouro', '$numero', '$complemento','$bairro', '$cidade', '$estado', '$cep')";
+				$sql_query = $conexao->query($sql_code);
+			}
+            
+            // ----------------------- TELEFONE -----------------------------------------------
+            
+            require_once "src/model/Contatos.php";
+            
+            $idContato = isset($_POST["id"]) ? $_POST["id"] : 0;
+			$tipocon = isset($_POST["tipocon"]) ? $_POST["tipocon"] : "";
+			$descricao = isset($_POST["descricao"]) ? $_POST["descricao"] : "";
+			$obs = isset($_POST["obs"]) ? $_POST["obs"] : "";		
+		
+
+			if(isset($_POST["$descricao"]) && isset($_POST["$tipocon"])){
+				$contato = new Contatos(
+					$idContato,
+					$idCliente,
+					$tipocon,
+					$descricao,
+					$obs				
+				);
+				
+				$sql_code2 = "INSERT INTO contatos VALUES (NULL, '$idCliente', '$tipocon', '$descricao', '$obs')";
+				$sql_query2 = $conexao->query($sql_code2);
+			}
             ?>
 
             <div class="accordion" id="accordionExample">
@@ -92,7 +152,7 @@
                             
                             <div class="col-md-3 col-sm-12">
                                 <label for="tipo_id_con" class="form-label">Tipo</label>
-                                <select class="form-select" id="tipo_id_con" name="tipo" required>
+                                <select class="form-select" id="tipo_id_con" name="tipocon" required>
                                     <option selected disabled value="">Selecione</option>
                                     <option value="Celular">Celular</option>
                                     <option value="Comercial">Comercial</option>
@@ -106,7 +166,7 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label for="obs_id" class="form-label">Observação</label>
-                                <input type="text" class="form-control" id="obs_id" name="numero" value="" aria-describedby="inputGroupPrepend2" required>
+                                <input type="text" class="form-control" id="obs_id" name="obs" value="" aria-describedby="inputGroupPrepend2" required>
                             </div>
                                         
                             <div class="col-12">
