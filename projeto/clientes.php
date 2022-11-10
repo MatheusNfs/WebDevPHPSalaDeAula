@@ -17,12 +17,20 @@
 			$lista = $sql_query->fetch_all(MYSQLI_ASSOC);
 			// var_dump($lista);
 		}
+		if(!isset($_SESSION)){
+			session_start();
+		}
+		$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
+		$nome = isset($_SESSION['nome']) ? $_SESSION['nome'] : 0;
+
+		echo "ID: $id - Cliente $nome";
 		
 		
 		?>
 		<main>
 			<h1>Clientes</h1>
 			<h3>Lista de cadastrados</h3>
+			<div class="table-responsive">
 			<table class = "table table-bordered">
 				<tr>
 					<th scope="col"> ID </th>
@@ -39,8 +47,8 @@
 				</tr>
 				<?php 
 				foreach($lista as $cliente):
-				
-				?>
+					
+					?>
 				<tr>
 					<td><?= $cliente["idcliente"]; ?></td>
 					<td><?= $cliente["nome"];?></td>
@@ -53,14 +61,15 @@
 					<td><?= $cliente["email"]; ?></td>
 					<td><?= $cliente["ativo"]; ?></td>
 					<td>
-						<a href="edicaoCliente.php">Editar</a>
-						<a href="excluirCliente.php">Excluir</a>
+						<a href="edicaoCliente.php?id=<?=$cliente["idcliente"]; ?>">EDITAR</a>
+						<a href="excluirCliente.php?id=<?=$cliente["idcliente"]; ?>">EXCLUIR</a>
 						
 					</td>
 					
 				<?php endforeach ?>	
 				</tr>
 			</table>
+			</div>
 		</main>
 		<?php include "html/rodape.php" ?>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

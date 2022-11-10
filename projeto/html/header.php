@@ -21,7 +21,7 @@
 						<h1 class="modal-title fs-5" id="staticBackdropLabel">Fazer Login</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-					<form action="" method="post" >
+					<form action="src/controller/cliente_bd/loginCliente.php" method="post" >
 						<div class="modal-body">
 
 							<main id="resposta" class="alert alert-danger" role="alert" style="display: none">
@@ -38,8 +38,8 @@
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
 
 
+							<a href="cadastroCliente.php">Crie o seu CADASTRO</a><br>
 							<a href="cadastroFuncionario.php">Crie cadastro de Funcionário</a>
-							<a href="cadastroCliente.php">Crie o seu CADASTRO</a>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
