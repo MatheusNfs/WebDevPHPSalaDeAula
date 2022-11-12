@@ -63,7 +63,7 @@
 			$obs = isset($_POST["obs"]) ? $_POST["obs"] : "";		
 		
 
-			if(isset($_POST["$descricao"]) && isset($_POST["$tipocon"])){
+			if(isset($_POST["descricao"]) && isset($_POST["tipocon"])){
 				$contato = new Contatos(
 					$idContato,
 					$idCliente,

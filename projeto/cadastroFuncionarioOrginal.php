@@ -32,49 +32,46 @@
 </head>
 	<!--  -->
 	<body>
-		<?php
-		include "html/header.php";
-		require_once "src/conexao.php";
-		require_once "src/model/Funcionario.php";
+		<?php 
+			include "html/header.php";
+			require_once "src/conexao.php";
+			require_once "src/model/Funcionario.php";
+
+			$idFuncionario = isset($_POST["id"]) ? $_POST["id"] : 0;
+			$nome = isset($_POST["nome"]) ? $_POST["nome"] : "";
+			$dataNascimento = isset($_POST["nascimento"]) ? $_POST["nascimento"] : "";
+			$cpf = isset($_POST["cpf"]) ? $_POST["cpf"] : "";
+			$estadoCivil = isset($_POST["estado_civil"]) ? $_POST["estado_civil"] : "";
 		
-		if(isset($_GET['gravado'])){
-			
-			$gravado = isset($_GET['gravado']) ? $_GET['gravado'] : 0;
-			
-			if($gravado > 0){
-				echo '<!DOCTYPE html>';
-				echo '<html lang="pt-br">';
-				echo '<head>';
-				echo '<meta http-equiv="refresh" content="5; url=cadastroFuncionario.php">';
-				echo '</head>';
-				echo '<body>';
-				echo '<div style="width: 1024px; margin: auto;" class="alert alert-success" role="alert">
-				Cadastro realizado com sucesso! <a style="text-decoration: none; float: right;" href="cadastroFuncionario.php" class="alert-link">x</a>
+			$tipo = isset($_POST["tipo"]) ? $_POST["tipo"] : "";
+			$telefone = isset($_POST["telefone"]) ? $_POST["telefone"] : "";
+			$email = isset($_POST["email"]) ? $_POST["email"] : "";
+			$senha = isset($_POST["senha"]) ? password_hash($_POST["senha"], PASSWORD_DEFAULT) : "";
+			$ativo = isset($_POST["ativo"]) ? $_POST["ativo"] : true;
+
+			if(isset($_POST["nome"]) && isset($_POST["senha2"])){
+				$funcionario = new Funcionario(
+					$idFuncionario,
+					$nome,
+					$dataNascimento,
+					$cpf,
+					$estadoCivil,
+					$tipo,
+					$telefone,
+					$email,
+					$senha,
+					$ativo
+				);
 				
-				</div>';
-				echo '</body>';
-				echo '</html>';
-			} else {
-				echo '<!DOCTYPE html>';
-				echo '<html lang="pt-br">';
-				echo '<head>';
-				echo '   <meta http-equiv="refresh" content="10; url=cadastroFuncionario.php">';
-				echo '</head>';
-				echo '<body>';
-				echo '<div style="width: 1024px; margin: auto;" class="alert alert-danger" role="alert">
-				Erro ao adicionado! <a style="text-decoration: none; float: right;" href="cadastroFuncionario.php" class="alert-link">x</a>
-				</div>';
-				echo '</body>';
-				echo '</html>';
+				$sql_code = "INSERT INTO funcionario  VALUES (NULL, '$nome', '$dataNascimento', '$cpf', '$estadoCivil', '$tipo','$telefone', '$email', '$senha', true)";
+				$sql_query = $conexao->query($sql_code);
 			}
-		}
-		
-		
+			
 		?>
 		<main>
         <div class="container-fluid">
 			<h3>Cadastro de Funcionário</h3>
-			<form class="row g-3 container-fluid" name="f" action="src/controller/funcionario_bd/registroFuncionario.php" method="post">
+			<form class="row g-3 container-fluid" name="f" action="" method="post">
 
 				<div class="col-md-6 col-sm-12">
 					<label for="nome_func" class="form-label">Nome completo</label>
@@ -97,7 +94,7 @@
 					<input type="cpf" class="form-control" id="cpf_id" name="cpf" value="" required>
 				</div>
 							
-				<div class="col-md-4 col-sm-12">
+				<div class="col-md-3 col-sm-12">
 					<label for="dtnasci" class="form-label">Data de nascimento</label>
 					<input type="date" class="form-control" id="dtnasci" name="nascimento" value="" required>
 				</div>

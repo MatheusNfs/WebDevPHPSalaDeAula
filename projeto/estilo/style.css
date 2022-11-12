@@ -72,14 +72,15 @@ header input[type=text] {
     border: none;
 }
 
-#cliente {
+
+
+.cliente {
     position: absolute;
     right: 5px;
     top: 0;
     background-color: none;
     border: none;
 }
-
 header nav {
     position: absolute;
     bottom: 0;
