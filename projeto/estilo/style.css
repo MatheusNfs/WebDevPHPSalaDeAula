@@ -168,7 +168,11 @@ p {
     text-indent: 50px;
     padding: 0;
 }
-
+.fotoProduto{
+    height: 200px;
+    margin: auto;
+    object-fit: cover;
+}
 ul,
 ol {
     list-style: none;
