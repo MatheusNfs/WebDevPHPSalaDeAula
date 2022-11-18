@@ -54,7 +54,7 @@
 			</table>
 			<div class="container-fluid">
             <h3>Registro de Produto</h3>
-            <form class="row g-3 container-fluid" action="" method="post">
+            <form class="row g-3 container-fluid" action="src/controller/estoque_bd/editarEstoque.php" method="post">
 
                 <input type="text" class="form-control" id="id_produto" name="id_produto" value="<?= $produto['idproduto'] ?>" hidden>
 
