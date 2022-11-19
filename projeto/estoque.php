@@ -50,13 +50,40 @@
 						<td><?=$produto['valor_compra']?></td>
 						<td><?=$produto['valor_venda']?></td>
 				</tr>
-					<?php }?>
+				 <?php }?>
+				</tr>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td><strong>TOTAL EM ESTOQUE</strong></td>
+				 <?php
+					
+					
+					$sql_entrada = "SELECT SUM(qtd) as Total1 FROM estoque WHERE registro = 'ENTRADA' AND id_produto = $id";
+					$sql_saida = "SELECT SUM(qtd) as Total2 FROM estoque WHERE registro = 'SAÍDA' AND id_produto = $id";
+					$totalEntrada = $conexao->query($sql_entrada);
+					$totalSaida = $conexao->query($sql_saida);
+					
+					$temp = $totalEntrada->fetch_assoc();
+					$temp2 = $totalSaida->fetch_assoc();
+					
+					$total = $temp['Total1'] - $temp2['Total2'];
+						
+				
+				?>
+				 <td><?php echo $total; ?></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
+				 <td></td>
 			</table>
 			<div class="container-fluid">
             <h3>Registro de Produto</h3>
             <form class="row g-3 container-fluid" action="src/controller/estoque_bd/editarEstoque.php" method="post">
 
-                <input type="text" class="form-control" id="id_produto" name="id_produto" value="<?= $produto['idproduto'] ?>" hidden>
+                <input type="text" class="form-control" id="id_produto" name="id_produto" value="<?php echo $id ?>" hidden>
 
                 <div class="col-md-2 col-sm-12">
                     <label for="qtdid" class="form-label">Quantidade</label>

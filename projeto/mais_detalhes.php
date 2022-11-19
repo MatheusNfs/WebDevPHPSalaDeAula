@@ -11,7 +11,7 @@
         
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-        $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id'";
+        $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id' ORDER BY idestoque DESC LIMIT 1";
         $sql_query = $conexao->query($sql_code);
         
         ?>
@@ -31,7 +31,20 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">TIPO: <?=$produto['tipo']?> </li>
                 <li class="list-group-item">CATEGORIA: <?=$produto['categoria']?> </li>
-                <li class="list-group-item">EM ESTOQUE:<?php if($produto['qtd']>0){echo ' SIM';}else{echo ' NÃO';};?></li>
+                <li class="list-group-item">EM ESTOQUE:
+                <?php
+                $sql_entrada = "SELECT SUM(qtd) as Total1 FROM estoque WHERE registro = 'ENTRADA' AND id_produto = $id";
+                $sql_saida = "SELECT SUM(qtd) as Total2 FROM estoque WHERE registro = 'SAÍDA' AND id_produto = $id";
+                $totalEntrada = $conexao->query($sql_entrada);
+                $totalSaida = $conexao->query($sql_saida);
+                
+                $temp = $totalEntrada->fetch_assoc();
+                $temp2 = $totalSaida->fetch_assoc();
+                
+                $total = $temp['Total1'] - $temp2['Total2']; 
+                
+                if($total>0){echo ' SIM';}else{echo ' NÃO';};
+                ?></li>
                 <li class="list-group-item">Valor: R$ <?= $produto['valor_venda'] ?></li>
             </ul>
             <?php }?>
