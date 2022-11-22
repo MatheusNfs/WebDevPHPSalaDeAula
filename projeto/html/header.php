@@ -48,7 +48,6 @@
 
 
 							<a href="cadastroCliente.php">Crie o seu CADASTRO</a><br>
-							<a href="src/logout.php">LOGOUT</a>
 							
 						</div>
 						<div class="modal-footer">
@@ -104,9 +103,14 @@
 
 							<!-- <input type="submit" value="Entrar" class="btn btn-primary"> -->
 
-
-							<a href="cadastroFuncionario.php">Cadastro de Funcionário</a><br>
-							<a href="src/logout.php">LOGOUT</a>
+							<?php 
+							if(isset($_SESSION['tipo']) && $_SESSION['tipo'] =='G'){
+								echo "<a href='cadastroFuncionario.php'>Cadastro de Funcionário</a><br>";
+							} 
+								 
+						 	?>
+							
+							
 							
 						</div>
 						<div class="modal-footer">

@@ -17,6 +17,16 @@
 		}
 		?>
 		<main>
+		<?php
+			if(isset($_SESSION['tipo'])){
+				echo "<a href='cadastroProduto.php' class='col-6 btn btn-link' style = 'float:right;'>
+				<i class='bi bi-plus-circle' style='font-size: 2rem;'></i>
+				<h6>Cadastrar</h6>
+			</a>";
+			}
+			?>
+		
+
 			<h1>Produtos</h1>
 			<h3>Lista de Produtos Cadastrados</h3>
 			<table class = "table table-bordered">
@@ -44,9 +54,9 @@
 						<td><?=$produto['descricao']?></td>
 						<td><?=$produto['ativo']?></td>
 						<td><?php
-							if(isset($_SESSION['tipo'])){
+							if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == "G"){
 								$idProduto = $produto['idproduto'];
-								echo "<a href='estoque.php?id=>$idProduto'>ESTOQUE</a>";
+								echo "<a href='estoque.php?id=$idProduto'>ESTOQUE</a>";
 							}
 							?>
 							<a href="mais_detalhes.php?id=<?=$produto["idproduto"]; ?>">DETALHES</a>

@@ -22,8 +22,8 @@
 		}
 		$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
 		$nome = isset($_SESSION['nome']) ? $_SESSION['nome'] : 0;
-
-		echo "ID: $id - Cliente $nome";
+		
+	
 		
 		
 		?>
@@ -62,14 +62,42 @@
 					<td><?= $cliente["ativo"]; ?></td>
 					<td>
 						<a href="edicaoCliente.php?id=<?=$cliente["idcliente"]; ?>">EDITAR</a>
-						<a href="excluirCliente.php?id=<?=$cliente["idcliente"]; ?>">EXCLUIR</a>
+						<?php
+							if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == "G"){
+								$idc = $cliente['idcliente'];
+								echo "<a href='#?id=$idc'; data-bs-toggle='modal' data-bs-target='#excluir_modal'>EXCLUIR</a>";
+							}
+						?>					
 						
 					</td>
-					
+					<td>
+					<div class="modal fade" id="excluir_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<form action="src/controller/cliente_bd/excluirCliente.php" method="post" >
+									<div class="modal-body">
+									<input type="text" value="<?=$cliente['idcliente'];?>">
+									<h2 style="text-align: center;">Deseja realmente excluir este cliente? <?= $cliente['nome']; ?></h2>	
+														
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+										<button type="submit" class="btn btn-danger">Confirmar</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					</td>
 				<?php endforeach ?>	
 				</tr>
 			</table>
 			</div>
+			
 		</main>
 		<?php include "html/rodape.php" ?>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
