@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php require "html/head.php" ?>
+	<?php require "html/head.php"; ?>
 </head>
 	<!--  -->
 	<body>
@@ -9,10 +9,11 @@
 		require_once "src/conexao.php";
 		require_once "src/protect.php";
 		
-		
-		if(!isset($_SESSION)){
-			session_start();
+		if(!isset($_SESSION['tipo'])){
+			header("Location: nao_permitido.php");
 		}
+		require_once "html/header.php";
+		
 		$id = isset($_SESSION['id']) ? $_SESSION['id'] : 0;
 		$nome = isset($_SESSION['nome']) ? $_SESSION['nome'] : 0;
 		$tipo = isset($_SESSION['tipo']) ? $_SESSION['tipo'] : 0;

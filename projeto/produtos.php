@@ -19,9 +19,9 @@
 		<main>
 		<?php
 			if(isset($_SESSION['tipo'])){
-				echo "<a href='cadastroProduto.php' class='col-6 btn btn-link' style = 'float:right;'>
+				echo "<a href='cadastroProduto.php' class='col-1 btn btn-link align-middle' style = 'float:right;'>
 				<i class='bi bi-plus-circle' style='font-size: 2rem;'></i>
-				<h6>Cadastrar</h6>
+				<h7 class='align-middle'>Cadastrar</h7>
 			</a>";
 			}
 			?>
