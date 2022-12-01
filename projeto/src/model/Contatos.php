@@ -1,11 +1,11 @@
 <?php
 
 class Contatos {
-    private int $idContato;
-    private int $idCliente;
-    private string $tipo;
-    private string $descricao;
-    private string $obs;
+    private $idContato;
+    private $idCliente;
+    private $tipo;
+    private $descricao;
+    private $obs;
     
 
     public function __construct(int $idContato, int $idCliente, string $tipo, string $descricao, string $obs){

@@ -1,17 +1,17 @@
 <?php
 
 class Cliente {
-    private int $idCliente;
-    private string $nome;
-    private string $dataNascimento;
-    private string $orgao;
-    private string $rg;
-    private string $cpf;
-    private string $estadoCivil;
-    private string $sexo;
-    private string $email;
-    private string $senha;
-    private bool $ativo;
+    private $idCliente;
+    private $nome;
+    private $dataNascimento;
+    private $orgao;
+    private $rg;
+    private $cpf;
+    private $estadoCivil;
+    private $sexo;
+    private $email;
+    private $senha;
+    private $ativo;
 
     public function __construct(int $idCliente, string $nome, string $dataNascimento, string $orgao, string $rg, string $cpf, string $estadoCivil,string $sexo, string $email, string $senha, bool $ativo){
         

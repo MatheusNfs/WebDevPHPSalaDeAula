@@ -1,16 +1,16 @@
 <?php
 
 class Funcionario {
-    private int $idFuncionario;
-    private string $nome;
-    private string $dataNascimento;
-    private string $cpf;
-    private string $estadoCivil;
-    private string $tipo;
-    private string $telefone;
-    private string $email;
-    private string $senha;
-    private bool $ativo;
+    private $idFuncionario;
+    private $nome;
+    private $dataNascimento;
+    private $cpf;
+    private $estadoCivil;
+    private $tipo;
+    private $telefone;
+    private $email;
+    private $senha;
+    private $ativo;
 
     public function __construct(int $idFuncionario, string $nome, string $dataNascimento, string $cpf, string $estadoCivil, string $tipo, string $telefone, string $email, string $senha, bool $ativo){
         
