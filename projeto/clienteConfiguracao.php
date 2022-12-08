@@ -40,7 +40,7 @@
 					</div>			
 				</div>
 			</a>
-			<a href="">
+			<a href="cadastroClienteComplemento.php?cod=1">
 				<div class="col">
 					<div class="card">
 			
@@ -60,7 +60,7 @@
 					</div>			
 				</div>
 			</a>
-			<a href="">
+			<a href="cadastroClienteComplemento.php?cod=2">
 				<div class="col">
 					<div class="card">
 					<?php if($cliente['descricao'] == ''){ ?>

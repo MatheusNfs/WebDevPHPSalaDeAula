@@ -19,10 +19,20 @@
         <?php 
             $idCliente = $_SESSION['id'];
             $nomeCliente = $_SESSION['nome'];
+            $cod = $_GET['cod'];
+
             echo "<h5>Complete seu cadastro, $nomeCliente!</h5>"; 
             
             require_once "src/conexao.php";
             require_once "src/model/Endereco.php";
+            
+            if(isset($idCliente)){
+                $sql_endereco = "SELECT * FROM endereco WHERE id_cliente = '$id'";
+                $sql_querypull = $conexao->query($sql_endereco);
+                $sql_contato = "SELECT * FROM contatos WHERE id_cliente = '$id'";
+                $sql_querypull2 = $conexao->query($sql_contato);
+            }
+           
             
 			$idEndereco = isset($_POST["id"]) ? $_POST["id"] : 0;
 			$tipo = isset($_POST["tipo"]) ? $_POST["tipo"] : "";
@@ -84,7 +94,7 @@
                         <h5>Endereço</h5>
                     </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse <?php if($cod == 1){echo "show";}else{echo "";}?>" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                     <div class="container-fluid">
                         <form class="row g-3 container-fluid" name="f" action="" method="post">
@@ -116,7 +126,7 @@
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label for="cidade" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" name="cidade" required>
+                                <input type="text" class="form-control" id="cidade" name="cidade" value="" required>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label for="estado" class="form-label">Estado</label>
@@ -125,7 +135,7 @@
                             <div class="col-md-3 col-sm-12">
                                 <label for="cep" class="form-label">CEP</label>
                                 <input type="text" class="form-control" id="cep" name="cep"  
-                                onblur="pesquisacep(this.value);" maxlength="9" required>
+                                onblur="pesquisacep(this.value);" value="" maxlength="9" required>
                             </div>
                                         
                             <div class="col-12">
@@ -133,6 +143,41 @@
                                 <button class="btn btn-primary" type="submit" id="btn-on" >Cadastrar</button>
                             </div>
                         </form>
+                        <h3>Lista de Produtos Cadastrados</h3>
+                        <table class = "table table-bordered">
+                            <tr>
+                                <th scope="col"> ID </th>
+                                <th scope="col"> TIPO </th>
+                                <th scope="col"> LOGRADOURO </th>
+                                <th scope="col"> NÚMERO </th>
+                                <th scope="col"> COMPLEMENTO </th>
+                                <th scope="col"> BAIRRO </th>
+                                <th scope="col"> CIDADE </th>
+                                <th scope="col"> ESTADO </th>
+                                <th scope="col"> CEP </th>
+                            </tr>
+                            <?php 
+                                while($cadastro = $sql_querypull->fetch_assoc()){
+                            ?>
+                            <tr>
+                                <td><?=$cadastro['id']?></td>
+                                <td><?=$cadastro['tipo']?></td>
+                                <td><?=$cadastro['logradouro']?></td>
+                                <td><?=$cadastro['numero']?></td>
+                                <td><?=$cadastro['complemento']?></td>
+                                <td><?=$cadastro['bairro']?></td>
+                                <td><?=$cadastro['cidade']?></td>
+                                <td><?=$cadastro['estado']?></td>
+                                <td><?=$cadastro['cep']?></td>
+                                <td><?php
+                                    if(isset($_SESSION['id'])){
+                                        $idEnd = $cadastro['id'];
+                                        echo "<a href='cadastroClienteComplemento.php?id=$idEnd&cod=1'>ALTERAR</a>";
+                                    }?>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </table>
                     </div>
                        
                     </div>
@@ -144,11 +189,11 @@
                         <h5>Contatos</h5>
                     </button>
                     </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" class="accordion-collapse collapse <?php if($cod == 2){echo "show";}else{echo "";}?>" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                     <div class="container-fluid">
                         <form class="row g-3 container-fluid" name="c" action="" method="post">
-                            <input type="text" class="form-control" id="id_cliente" name="idcliente" value="" hidden>
+                            <input type="text" class="form-control" id="id_cliente" name="idcliente" value="<?$idCliente?>" hidden>
                             
                             <div class="col-md-3 col-sm-12">
                                 <label for="tipo_id_con" class="form-label">Tipo</label>
