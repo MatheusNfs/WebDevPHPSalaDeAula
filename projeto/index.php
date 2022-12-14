@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+
+	$teste = isset($_COOKIE['cliente']) ? $_COOKIE['cliente'] : '';
+	$login = isset($_COOKIE['login']) ? $_COOKIE['login'] : '';
+
+?>
 <html lang="pt-br">
 
 <head>
@@ -35,6 +41,19 @@
 			$prod2 = $sql_query2 -> fetch_assoc();
 			$lista[] = $prod2;
 		}
+		?>
+		<?php
+			echo "Cookie: " . $teste;
+			echo "<br>";
+			echo "Time(): " . time();
+			echo "<br>";
+			echo "Data e Hora: " . date("d/m/y H:i:s");
+			echo "<br>";
+			echo "Data e Hora: " . date("d/m/y H:i:s", time()+3600);
+			echo "<br>";
+			echo "Cookie 2: " . $login;
+			echo "<br>";
+
 		?>
 		<div id="banner">
 			<img src="img/banner/Banner1.png" alt="">
