@@ -35,12 +35,14 @@ require_once "../../conexao.php";
                     // strtotime("+1 day");
                     // strtotime("+1 month");
                     // strtotime("+1 yaer");
-                    setcookie('cliente', $cliente['nome'], time()+2592000, "/");
+                    // setcookie('cliente', $cliente['nome'], time()+2592000, "/");
                     // setcookie('cliente', $cliente['nome'], strtotime("+1 month"), "/");
 
 
                     if($lembrar){
-                    setcookie('login', $cliente['email'], strtotime("+1 month"), "/", "", false, true);
+                        if(!isset($_COOKIE['login']) || $_COOKIE['login'] != $email){
+                            setcookie('login', $cliente['email'], strtotime("+1 month"), "/", "", false, true);
+                        }
                     } else {
                         setcookie('login', $cliente['email'], strtotime("-1 month"), "/", "", false, true);
                     }

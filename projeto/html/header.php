@@ -6,7 +6,12 @@
 				<figure id="logo">
 					<img src="img/favicon.ico" alt="Logo">
 				</figure>
-				<input type="text" name="buscar" id="buscar" placeholder="Busque aqui" >
+				<form action="produtos.php" method="get">
+					<div class="input-group" id="buscar">
+						<input type="text" class="form-control" name="buscar" placeholder="Busque aqui" required>
+						<button class="btn btn-primary" id="btn-buscar"><i class="bi bi-search"></i></button>
+					</div>
+				</form>	
 				<h1 id="textoEnviamos">Enviamos produtos para todo o território nacional.</h1>
 				<figure style="border: none">
 					<img id="carrinho" src="img/carrinhoCompra.png" alt="">

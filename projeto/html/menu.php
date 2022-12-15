@@ -19,7 +19,7 @@ if(!isset($_SESSION)){
                  if(isset($_SESSION['nome'])){
                    
             ?>
-                    <li style = 'float: right;'><a href="clienteConfiguracao.php">Bem-vindo, <?= substr($_SESSION['nome'],0,strpos($_SESSION['nome']," "));?></a></li>            
+                    <li style = 'float: right;'><a href="clienteConfiguracao.php">Bem-vindo, <?php if(str_word_count($_SESSION['nome']) == 1){ echo $_SESSION['nome']; }else{ echo substr($_SESSION['nome'],0,strpos($_SESSION['nome']," ")); }?></a></li>            
                   
             <?php } ?> 
         </ul>
