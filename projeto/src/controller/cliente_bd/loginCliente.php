@@ -50,12 +50,30 @@ require_once "../../conexao.php";
                     header("Location: ../../../index.php");
                 }else{
                     // header("Location: ../../../nao_permitido.php");
-                    echo "Falha ao logar! E-mail ou senha incorretos";
+                    // echo "Falha ao logar! E-mail ou senha incorretos";
+                    paginaErroLogin();
                 }              
 
             } else {
-                echo "Falha ao logar! E-mail ou senha incorretos";
+                // echo "Falha ao logar! E-mail ou senha incorretos";
+                paginaErroLogin();
             }
+
+    }
+
+    function paginaErroLogin(){
+        echo '<!DOCTYPE html>';
+                    echo '<html xmlns="http://www.w3.org/1999/xhtml">';
+                    echo '<head>';
+                    echo '   <meta http-equiv="refresh" content="1.3; url=../../../index.php">';
+                    echo '</head>';
+                    echo '<body>';
+                    echo '<div class="alert alert-danger" role="alert">
+                        <a style="text-decoration: none; float: right;" href="index.php" class="alert-link">x</a>
+                        <h3 style="text-align: center;">Falha ao logar! E-mail ou senha incorretos!</h3>
+                    </div>';
+                    echo '</body>';
+                    echo '</html>';
 
     }
 
