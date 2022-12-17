@@ -64,9 +64,9 @@
 					<td><?= $cliente["email"]; ?></td>
 					<td><?= $cliente["ativo"]; ?></td>
 					<td>
-						<a href="edicaoCliente.php?id=<?=$cliente['idcliente']; ?>">
+						<a style="text-decoration:none;" href="edicaoCliente.php?id=<?=$cliente['idcliente']; ?>">
                         <!-- [EDITAR] -->
-                        <i class="bi bi-pencil-square" style="font-size: 1.15rem;"></i>
+                        <i class="bi bi-pencil-square" style="font-size: 1.15rem;" data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Editar'></i>
                         </a>
 
                        <?php if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == "G"){?>
@@ -74,7 +74,7 @@
 
                         <!-- src/controler/cliente_bd/excluirCliente.php?id= -->
                         <!-- [EXCLUIR] -->
-                         <i class="bi bi-trash" style="font-size: 1.15rem; color: red;"></i>
+                         <i class="bi bi-trash" style="font-size: 1.15rem; color: red;" data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Excluir'></i>
                         </a>
                        <?php } ?>
 						
@@ -89,6 +89,7 @@
 		<?php include "html/rodape.php" ?>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 		<script src="src/js/confirmacao.js"></script>
+		<script src="src/js/tooltip.js"></script>
 </body>
 
 </html>

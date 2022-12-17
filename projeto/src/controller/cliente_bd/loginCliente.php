@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <?php 
+        require "../../../html/head.php"; 
+    ?>
+</head>
 <?php 
 
 require_once "../../conexao.php";
@@ -65,13 +72,14 @@ require_once "../../conexao.php";
         echo '<!DOCTYPE html>';
                     echo '<html xmlns="http://www.w3.org/1999/xhtml">';
                     echo '<head>';
-                    echo '   <meta http-equiv="refresh" content="1.3; url=../../../index.php">';
+                    echo '   <meta http-equiv="refresh" content="1.5; url=../../../index.php">';
                     echo '</head>';
                     echo '<body>';
                     echo '<div class="alert alert-danger" role="alert">
-                        <a style="text-decoration: none; float: right;" href="index.php" class="alert-link">x</a>
-                        <h3 style="text-align: center;">Falha ao logar! E-mail ou senha incorretos!</h3>
-                    </div>';
+                            <a style="text-decoration: none; float: right;" href="index.php" class="alert-link">x</a>
+                            <h3 style="text-align: center;">Falha ao logar! E-mail ou senha incorretos!</h3>
+                        </div>';
+                    echo '<img src="../../../img/erroLogin.jpg" style="width: 20rem; margin-left: 40%;">'; 
                     echo '</body>';
                     echo '</html>';
 

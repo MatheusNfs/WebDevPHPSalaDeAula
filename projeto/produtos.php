@@ -64,10 +64,10 @@
 							<td><?php
 								if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == "G"){
 									$idProduto = $produto['idproduto'];
-									echo "<a href='estoque.php?id=$idProduto'>ESTOQUE</a>";
+									echo "<a href='estoque.php?id=$idProduto'><i class='bi bi-clipboard-plus' style='font-size:1.2rem;' data-bs-toggle='tooltip' data-bs-placement='left' data-bs-title='Estoque'></i></a>";
 								}
 								?>
-								<a href="mais_detalhes.php?id=<?=$produto["idproduto"]; ?>">DETALHES</a>
+								<a href="mais_detalhes.php?id=<?=$produto["idproduto"]; ?>"><i class="bi bi-clipboard-data" style="font-size:1.2rem;" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Detalhes"></i></a>
 							</td>
 					</tr>
 						<?php }?>
@@ -81,6 +81,7 @@
 		</main>
 		<?php include "html/rodape.php" ?>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+		<script src="src/js/tooltip.js"></script>
 
 </body>
 

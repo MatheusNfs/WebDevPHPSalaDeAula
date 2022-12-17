@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php 
-    require "html/head.php"; 
-    require_once "src/protect.php";
-    
+    <?php 
+        require "html/head.php"; 
+        require_once "src/protect.php";
     ?>
-<script>
-    
-    </script>
 </head>
 <!--  -->
 <body>
@@ -84,7 +80,19 @@
 				
 				$sql_code2 = "INSERT INTO contatos VALUES (NULL, '$idCliente', '$tipocon', '$descricao', '$obs')";
 				$sql_query2 = $conexao->query($sql_code2);
-			}
+            }
+            
+            //-------------------------RES PROF-------------------------------------------------
+
+            $lista = [];
+            $sql_end_array = "SELECT * FROM endereco WHERE id_cliente = '$id'"
+            $sql_querylista = $conexao->query($sql_end_array);
+
+            if($sql_querylista->num_rows > 0){
+                $lista = $sql_query->fetch_all(MYSQLI_ASSOC);
+            }
+
+            if
             ?>
 
             <div class="accordion" id="accordionExample">
@@ -94,7 +102,7 @@
                         <h5>Endereço</h5>
                     </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse <?php if($cod == 1){echo "show";}else{echo "";}?>" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse <?php if(!isset($_GET['cod']) || $cod == 1){echo "show";}else{echo "";}?>" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                     <div class="container-fluid">
                         <form class="row g-3 container-fluid" name="f" action="" method="post">
@@ -157,24 +165,29 @@
                                 <th scope="col"> CEP </th>
                             </tr>
                             <?php 
-                                while($cadastro = $sql_querypull->fetch_assoc()){
+                                // while($cadastro = $sql_querypull->fetch_assoc()){
+                                for($i = 0; $i < count($lista); $i++) :
                             ?>
+                            <?php $cadastroEnd = $lista[$i]?>
                             <tr>
-                                <td><?=$cadastro['id']?></td>
-                                <td><?=$cadastro['tipo']?></td>
-                                <td><?=$cadastro['logradouro']?></td>
-                                <td><?=$cadastro['numero']?></td>
-                                <td><?=$cadastro['complemento']?></td>
-                                <td><?=$cadastro['bairro']?></td>
-                                <td><?=$cadastro['cidade']?></td>
-                                <td><?=$cadastro['estado']?></td>
-                                <td><?=$cadastro['cep']?></td>
-                                <td><?php
-                                    if(isset($_SESSION['id'])){
-                                        $idEnd = $cadastro['id'];
-                                        echo "<a href='cadastroClienteComplemento.php?id=$idEnd&cod=1'>ALTERAR</a>";
+                                <td><?=$cadastroEnd['id']?></td>
+                                <td><?=$cadastroEnd['tipo']?></td>
+                                <td><?=$cadastroEnd['logradouro']?></td>
+                                <td><?=$cadastroEnd['numero']?></td>
+                                <td><?=$cadastroEnd['complemento']?></td>
+                                <td><?=$cadastroEnd['bairro']?></td>
+                                <td><?=$cadastroEnd['cidade']?></td>
+                                <td><?=$cadastroEnd['estado']?></td>
+                                <td><?=$cadastroEnd['cep']?></td>
+                                <td><a href="?posicao"><i class='bi bi-pencil-square' style='font-size:1.2rem;' data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Editar'></i></a>
+								<a href=''><i class="bi bi-trash" style="font-size:1.2rem; color:red;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Excluir"></i></a>
+                                <!-- <td><?php
+                                    // if(isset($_SESSION['id'])){
+                                    //     $idEnd = $cadastro['id'];
+                                    //     echo "<a href='cadastroClienteComplemento.php?id=$idEnd&cod=1'>ALTERAR</a>";
                                     }?>
-                                </td>
+                                </td> -->
+							</td>
                             </tr>
                             <?php }?>
                         </table>

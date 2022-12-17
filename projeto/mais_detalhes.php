@@ -8,12 +8,50 @@
 		<?php 
         include "html/header.php";
         require_once "src/conexao.php";
+        include_once "src/model/Produto.php";
+        include_once "src/model/Estoque.php";
         
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-        $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id' ORDER BY idestoque DESC LIMIT 1";
+        $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id'";
+        // $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id' ORDER BY idestoque DESC LIMIT 1";
         $sql_query = $conexao->query($sql_code);
         
+        if($sql_query->num_rows > 0){
+            $estoque = $sql_query->fetch_assoc();
+            $objProduto = new Produto(
+                $estoque['idproduto'],
+                $estoque['nome'],
+                $estoque['tipo'],
+                $estoque['categoria'],
+                $estoque['fabricante'],
+                $estoque['descricao'],
+                $estoque['foto'],
+                $estoque['ativo'],
+            );
+            if(isset($estoque['idestoque'])){
+                $objEstoque = new Estoque(
+                    $estoque['idestoque'],
+                    $objProduto,
+                    $estoque['qtd'],
+                    $estoque['registro'],
+                    $estoque['data_registro'],
+                    $estoque['valor_compra'],
+                    $estoque['valor_venda']
+                );
+            }else{
+                $objEstoque = new Estoque(
+                    0,
+                    $objProduto,
+                    0,
+                    '---',
+                    '---',
+                    0.0,
+                    0.0
+                );
+            }
+        }
+
         ?>
 		<main>
 		<h1>Detalhes do Produto</h1>
@@ -51,6 +89,7 @@
             <div class="card-body">
                 <a href="index.php" class="card-link">Voltar</a>
                 <a href="produtos.php" class="card-link">Lista de Produtos</a>
+                <a href="?<?='id='.$id.'&adicionar='.$objEstoque->getIdEstoque() ?>" class="card-link" <?=(!isset($estoque['qtd']) || $estoque['qtd'] < 1) ? 'hidden' : ''?>>Adicionar ao Carrinho</a>
             </div>
         </div>
 		</main>
