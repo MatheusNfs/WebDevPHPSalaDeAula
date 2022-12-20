@@ -1,5 +1,8 @@
 <?php
 	$login = isset($_COOKIE['login']) ? $_COOKIE['login'] : '';
+	if(!isset($_SESSION)){
+        session_start();
+    }
 ?>
 <header>
 			<section>
@@ -8,17 +11,23 @@
 				</figure>
 				<form action="produtos.php" method="get">
 					<div class="input-group" id="buscar">
-						<input type="text" class="form-control" name="buscar" placeholder="Busque aqui" required>
+						<select class = "form-select" style = "width:10px; background-color:#66e0ff; color:white;" name="buscaesp" id="busca_esp">
+							<option selected disabled value="">Selecione</option>
+                            <option value="nome">Nome</option>
+                            <option value="categoria">Categoria</option>
+                            <option value="fabricante">Fabricante</option>
+						</select>
+						<input type="text" style="width:250px;" class="form-control" name="buscar" placeholder="Busque aqui" required>
 						<button class="btn btn-primary" id="btn-buscar"><i class="bi bi-search"></i></button>
 					</div>
 				</form>	
 				<h1 id="textoEnviamos">Enviamos produtos para todo o território nacional.</h1>
 				<figure style="border: none">
-					<img id="carrinho" src="img/carrinhoCompra.png" alt="">
+					<img id="carrinho" src="img/carrinhoCompra<?=(isset($_SESSION['carrinho']))? '2' : ''?>.png" alt="" data-bs-toggle='modal' data-bs-target='#carrinho_modal'>
 					<?php 
-						if(!isset($_SESSION)){
-							session_start();
-						}
+						// if(!isset($_SESSION)){
+						// 	session_start();
+						// }
 						if(!isset($_SESSION['id'])){
 							echo '<img class="cliente" src="img/clientes.png" style="padding:4px;" alt="" data-bs-toggle="modal" data-bs-target="#login_modal">';
 						}else{
@@ -134,3 +143,36 @@
 				</div>
 			</div>
 		</div>
+		<!-- Modal -->
+<div class="modal fade" id="carrinho_modal" tabindex="-1" aria-labelledby="exampleModalPopoversLabel" style="display: none;" aria-hidden="true">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h1 class="modal-title fs-5" id="exampleModalPopoversLabel">Carrinho de compras</h1>
+        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      		</div>
+      		<div class="modal-body">
+				<?php if(isset($_SESSION['carrinho'])) : ?>
+        		<h2 class="fs-5"><?= count($_SESSION['carrinho']) ?> - PRODUTOS NO SEU CARRINHO</h2><br>
+        		<?php foreach($_SESSION['carrinho'] as $key => $value) : ?>
+            		<div>
+                		<a id="excluir" href="?remover=<?= $key ?>"><i class="bi bi-trash text-danger"></i></a>
+                		<?= $value['qtd'] .' x '. number_format($value['valor'], 2, ',', '.') ?>= R$ <?= number_format($value['valor'] * $value['qtd'], 2, ',', '.'); ?> - <?= $value['produto']; ?>
+            		</div>
+            		<div>
+            		</div>
+       
+        			<hr>
+
+				<?php 
+					endforeach; 
+					endif;
+				?>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary">IR PARA O CARRINHO</button>
+      		</div>
+    	</div>
+  	</div>
+</div>

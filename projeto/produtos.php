@@ -10,10 +10,15 @@
 		require_once "src/conexao.php";
 
 		$buscado = isset($_GET['buscar'])? $_GET['buscar'] : '';
+		$buscaEsp = isset($_GET['buscaesp'])? $_GET['buscaesp'] : '';
 		$sql_code;
 
 		if($buscado){
-			$sql_code = "SELECT * FROM produtos WHERE descricao LIKE '%$buscado%' ORDER BY nome";
+			if($buscaEsp){
+				$sql_code = "SELECT * FROM produtos WHERE $buscaEsp LIKE '%$buscado%' ORDER BY nome";
+			}else{
+				$sql_code = "SELECT * FROM produtos WHERE descricao LIKE '%$buscado%' ORDER BY nome";
+			}
 		}else{
 			$sql_code = "SELECT * FROM produtos";
 		}

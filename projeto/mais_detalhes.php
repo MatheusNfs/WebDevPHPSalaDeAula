@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<?php require "html/head.php" ?>
+<?php 
+    require "html/head.php"; 
+    if(!isset($_SESSION)){
+        session_start();
+    }
+?>
 </head>
 	<!--  -->
 	<body>
@@ -51,24 +56,26 @@
                 );
             }
         }
+        
+        include_once 'carrinho.php';
 
         ?>
 		<main>
 		<h1>Detalhes do Produto</h1>
 		<div class="card">
             <?php 
-				while($produto = $sql_query->fetch_assoc()){
+				// while($produto = $sql_query->fetch_assoc()){
 
 			?>
 
-            <img src="<?=$produto['foto']?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
+            <img src="<?=$estoque['foto']//$produto['foto']?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text"></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">TIPO: <?=$produto['tipo']?> </li>
-                <li class="list-group-item">CATEGORIA: <?=$produto['categoria']?> </li>
+                <li class="list-group-item">TIPO: <?=$estoque['tipo']//$produto['tipo']?> </li>
+                <li class="list-group-item">CATEGORIA: <?=$estoque['categoria']//$produto['categoria']?> </li>
                 <li class="list-group-item">EM ESTOQUE:
                 <?php
                 $sql_entrada = "SELECT SUM(qtd) as Total1 FROM estoque WHERE registro = 'ENTRADA' AND id_produto = $id";
@@ -83,9 +90,9 @@
                 
                 if($total>0){echo ' SIM';}else{echo ' NÃO';};
                 ?></li>
-                <li class="list-group-item">Valor: R$ <?= $produto['valor_venda'] ?></li>
+                <li class="list-group-item">Valor: R$ <?=$estoque['valor_venda']//$produto['valor_venda'] ?></li>
             </ul>
-            <?php }?>
+            <?php //}?>
             <div class="card-body">
                 <a href="index.php" class="card-link">Voltar</a>
                 <a href="produtos.php" class="card-link">Lista de Produtos</a>
