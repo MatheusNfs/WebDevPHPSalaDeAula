@@ -68,7 +68,7 @@
 
 			?>
 
-            <img src="<?=$objEstoque->getProduto()->getFoto()//$produto['foto']?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
+            <img src="<?=$estoque['foto']//$produto['foto']?>" style="width: 20rem; margin: auto" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text"></p>

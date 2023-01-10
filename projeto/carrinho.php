@@ -10,10 +10,12 @@ if(isset($_GET['adicionar'])){
                 'idEstoque' => $idItem, 
                 'produto' => $objEstoque->getProduto()->getNome(), 
                 'valor' => $objEstoque->getValorVenda(), 
-                'qtd' => 1
+                'qtd' => 1,
+                'obj' => serialize($objEstoque)
             );
         }
         echo "<script>alert('O item foi adicionado ao carrinho.');</script>";
+        echo "<script> window.location.href='mais_detalhes.php?id=$id';</script>";
     }else{
         die("produto não existe");
     }
