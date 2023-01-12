@@ -188,19 +188,20 @@
 		}
 
 		unset($_GET['remover']);
-		echo "<script></script>";
-	}
-?>
-<script>
-	const btn = document.querySelector("#excluir");
-
-	let dominio = window.location.host;
+		echo "<script>let dominio = window.location.host;
 		let end = window.location.href;//mais_detalhes.php
 		let finalEnd = end.indexOf('.');//posição do caracter "."
-		let pagina = end.substr((dominio.length+9),finalEnd);
+		let tamanhoPasta = 'https//:/pHP-M/projeto'.length;
+		let pagina;
+		if(dominio.indexOf('localhost')>=0){
+			pagina = end.substr((dominio.length + tamanhoPasta),finalEnd);
+		}else{
+			pagina = end.substr((dominio.length + 1),finalEnd);
+		}
+		pagina = pagina.substr(0, pagina.indexOf('.'));
 		let idItemRemovido = end.substr(end.indexOf('=')+1, end.length);
 		console.log('Domínio: '+dominio);
-		console.log('Tamanho do domínio: '+dominio.length+' + 9 = '+(dominio.length+9));
+		console.log('Tamanho do domínio: '+dominio.length+' + 9 = '+(dominio.length+22));
 		console.log('Página: '+pagina);
 		console.log('Endereço 1: '+end);
 		console.log('Tamanho do Endereço 1: '+end.length);
@@ -212,9 +213,8 @@
 				end = end.substr(0,end.indexOf('?'));
 			}
 			console.log('Endereço 2: '+end);
-			//window.location.href = ''+end;
+			window.location.href = ''+end;
+</script>";
+	}
+?>
 
-	btn.addEventListener('click',()=>{
-		// location.reload()
-	})
-</script>
