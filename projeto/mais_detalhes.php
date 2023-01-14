@@ -57,7 +57,7 @@
             }
         }
         
-        include_once 'carrinho.php';
+        include_once 'carrinhoGerencia.php';
 
         ?>
 		<main>
@@ -94,9 +94,9 @@
             </ul>
             <?php //}?>
             <div class="card-body">
-                <a href="index.php" class="card-link">Voltar</a>
-                <a href="produtos.php" class="card-link">Lista de Produtos</a>
-                <a href="?<?='id='.$id.'&adicionar='.$objEstoque->getProduto()->getIdProduto() ?>" class="card-link" <?=(!isset($estoque['qtd']) || $estoque['qtd'] < 1) ? 'hidden' : ''?>>Adicionar ao Carrinho</a>
+                <a href="index.php" class="btn btn-outline-primary">Voltar</a>
+                <a href="produtos.php" class="btn btn-outline-warning">Lista de Produtos</a>
+                <a href="?<?='id='.$id.'&adicionar='.$objEstoque->getProduto()->getIdProduto() ?>" class="btn btn-outline-success" <?=(!isset($estoque['qtd']) || $estoque['qtd'] < 1) ? 'hidden' : ''?>>Adicionar ao Carrinho</a>
             </div>
         </div>
 		</main>

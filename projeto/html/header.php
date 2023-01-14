@@ -171,7 +171,7 @@
       		</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">FECHAR</button>
-        		<button type="button" class="btn btn-primary">IR PARA O CARRINHO</button>
+        		<a href='carrinho.php' type="button" class="btn btn-primary">IR PARA O CARRINHO</a>
       		</div>
     	</div>
   	</div>
@@ -188,13 +188,50 @@
 		}
 
 		unset($_GET['remover']);
-		echo "<script>let dominio = window.location.host;
+		echo '<script defer>
+		let dominio = window.location.host;
+		let end = window.location.href;// mais_detalhes.php
+		let finalEnd = end.indexOf("."); // posição do caracter "."
+		let tamanhoPasta = "/php-m/projeto/".length;
+		let pagina = "";
+		let posicao = end.indexOf("localhost"); 
+		if( posicao >= 0){
+			pagina = end.substr((posicao + dominio.length + tamanhoPasta), finalEnd); // mais_detalhes
+		} else {
+			pagina = end.substr((dominio.length + 1), finalEnd); // mais_detalhes
+		}
+		pagina = pagina.substr(0, pagina.indexOf("."));
+		let idItemRemovido = end.substr(end.indexOf("=")+1, end.length);
+		console.log("Domínio: "+ dominio);
+		console.log("tamanho do domínio: "+ dominio.length + " + 9 = "+ (dominio.length +9));
+		console.log("Tamanho da pasta: "+ tamanhoPasta);
+		console.log("Pagina: "+ pagina);
+		console.log("Endereço 1: "+ end);
+		console.log("Tamanho do Endereço 1: "+ end.length);
+		console.log("Posição do Ponto do Endereço 1: "+ end.indexOf("."));
+			if(pagina == "mais_detalhes"){
+				end = end.substr(0, end.indexOf("?"));
+				end = end + "?id=" + idItemRemovido;
+				// end = pagina + ".php?id=" + idItemRemovido;
+			} else {
+				end = end.substr(0, end.indexOf("?"));
+				// end = end + "Teste";
+			}
+	
+			console.log("Endereço 2: " + end);
+			window.location.href=""+end;
+			
+		</script>';
+	}
+?>
+<!-- <script>let dominio = window.location.host;
 		let end = window.location.href;//mais_detalhes.php
 		let finalEnd = end.indexOf('.');//posição do caracter "."
-		let tamanhoPasta = 'https//:/pHP-M/projeto'.length;
+		let tamanhoPasta = '/pHP-M/projeto'.length;
 		let pagina;
-		if(dominio.indexOf('localhost')>=0){
-			pagina = end.substr((dominio.length + tamanhoPasta),finalEnd);
+		let posicao = end.indexOf('localhost'); 
+		if( posicao >= 0){
+			pagina = end.substr((posicao + dominio.length + tamanhoPasta), finalEnd);
 		}else{
 			pagina = end.substr((dominio.length + 1),finalEnd);
 		}
@@ -214,7 +251,5 @@
 			}
 			console.log('Endereço 2: '+end);
 			window.location.href = ''+end;
-</script>";
-	}
-?>
+			</script> -->
 

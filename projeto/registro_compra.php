@@ -6,13 +6,20 @@
 	<!--  -->
 	<body>
 		<?php 
-			include "html/header.php";
+            include "html/header.php";
+            include_once "src/conexao.php";
+            include_once "src/protect.php";
 			include_once "src/model/Produto.php";
-			include_once "src/model/Estoque.php";
+            include_once "src/model/Estoque.php";
+            
+            $id = $_SESSION['id'];
 		?>
 		<main>
-			<h1>Carrinho de Compras</h1>
-			<?php if(isset($_SESSION['carrinho'])) : ?>
+			<h1>REGISTRO DE COMPRA</h1>
+            <?php 
+                if(isset($_SESSION['carrinho'])) : 
+            $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";    
+            ?>
 			<div class="table-responsive">
 				<table class = "table table-bordered align-middle">
 					<tr>
@@ -28,7 +35,9 @@
 					</tr>
 					<?php 
 						$totalCompra = 0;
-						foreach($_SESSION['carrinho'] as $key => $value) : ?>
+                        foreach($_SESSION['carrinho'] as $key => $value) : 
+                            $sql_code = $sql_code.unserialize($value['obj'])->getProduto()->getIdProduto().",";
+                    ?>
 					<tr>
 							<td><img width = "50" src="<?=unserialize($value['obj'])->getProduto()->getFoto()?>"></td>
 							<td><?=unserialize($value['obj'])->getProduto()->getNome()?></td>
@@ -46,7 +55,10 @@
 							
 							
 					</tr>
-					<?php endforeach;?>
+                    <?php 
+                        endforeach;
+                        $sql_code = substr($sql_code, 0, (strlen($sql_code)-1)).');';
+                    ?>
 					<tr>
 						<td colspan='7' style='text-align:right'><strong>TOTAL</strong></td>
 						<td colspan='2' style='text-align:center'><strong><?=number_format($totalCompra,2,',','.') ?></strong></td>
@@ -54,7 +66,28 @@
 				</table>
 					<?php else: 
 								echo "<h3 style='text-align:center; margin-top:50px'>Carrinho vazio!</h3>";
-						endif;
+                        endif;
+                        $podeRegistrar = true;
+                        $texto = 'Não possuímos o(s) produto(s) selecionado(s) em estoque: ';
+                        $sql_query = $conexao->query($sql_code);
+                        $lista = [];
+                        if($sql_query->num_rows > 0){
+                            $lista = $sql_query->fetch_all(MYSQLI_ASSOC);
+                        }
+                        foreach($lista as $registro){
+                            $qtdSolicitada = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
+                            if(0 < $qtdSolicitada){
+                                $podeRegistrar = false;
+                                $texto = $texto.'\\n'.$qtdSolicitada.' - '.$registro['nome'];
+                            }else{
+                                //SQL PARA REGISTRAR NAS 2 TABELAS (ESTOQUE E HISTORICO_COMPRA)
+                            }
+                        }
+                        if($podeRegistrar){
+                            echo "<script> alert('REGISTRADO!');</script>";
+                        }else{
+                            echo "<script> alert('".$texto."');</script>";
+                        }
 					?>
 			</div>
 			<hr>
