@@ -24,6 +24,7 @@
 				
 			}
 			$sql_code = "SELECT * FROM cliente LEFT JOIN endereco ON idcliente = endereco.id_cliente LEFT JOIN contatos ON idcliente = contatos.id_cliente WHERE idcliente = '$id'";
+			
 			$sql_query = $conexao->query($sql_code);
 		?>
 		<main>
@@ -80,7 +81,7 @@
 				</div>
 	
 			</a>
-			<a href="">
+			<a href="historico_compra.php">
 				<div class="col">
 					<div class="card">
 					<i class="bi bi-table text-center" style="font-size: 10rem;"></i>

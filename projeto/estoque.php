@@ -11,8 +11,15 @@
 
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 
+		//SELECT idproduto, nome, (SELECT SUM(qtd) FROM estoque WHERE registro = 'ENTRADA' AND id_produto = '$id') - (SELECT SUM(qtd) FROM estoque WHERE registro = 'SAÍDA' AND id_produto = '$id') AS saldo FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id';  
+
 		$sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$id'";
 		$sql_query = $conexao->query($sql_code);
+
+		$listaProdutos = [];
+		if($sql_query->num_rows > 0){
+			$listaProdutos = $sql_query->fetch_all(MYSQLI_ASSOC);
+		}
 				
 		?>
 		<main>
@@ -34,8 +41,8 @@
 					
 				</tr>
 				<?php 
-					while($produto = $sql_query->fetch_assoc()){
-
+					//while($produto = $sql_query->fetch_assoc()){
+					foreach($listaProdutos as $produto ):
 				?>
 				<tr>
 						<td><?=$produto['idproduto']?></td>
@@ -50,7 +57,7 @@
 						<td><?=$produto['valor_compra']?></td>
 						<td><?=$produto['valor_venda']?></td>
 				</tr>
-				 <?php }?>
+					<?php endforeach;?>
 				</tr>
 				 <td></td>
 				 <td></td>
@@ -69,7 +76,7 @@
 					$temp = $totalEntrada->fetch_assoc();
 					$temp2 = $totalSaida->fetch_assoc();
 					
-					$total = $temp['Total1'] - $temp2['Total2'];
+					$total = (isset($temp['Total1'])? $temp['Total1'] : 0 )  - (isset($temp2['Total2'])? $temp2['Total2'] : 0);
 						
 				
 				?>

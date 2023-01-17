@@ -86,9 +86,9 @@
                 $temp = $totalEntrada->fetch_assoc();
                 $temp2 = $totalSaida->fetch_assoc();
                 
-                $total = $temp['Total1'] - $temp2['Total2']; 
+                $total = (isset($temp['Total1'])? $temp['Total1'] : 0 )  - (isset($temp2['Total2'])? $temp2['Total2'] : 0); 
                 
-                if($total>0){echo ' SIM';}else{echo ' NÃO';};
+                echo $total;
                 ?></li>
                 <li class="list-group-item">Valor: R$ <?=$estoque['valor_venda']//$produto['valor_venda'] ?></li>
             </ul>
@@ -96,7 +96,9 @@
             <div class="card-body">
                 <a href="index.php" class="btn btn-outline-primary">Voltar</a>
                 <a href="produtos.php" class="btn btn-outline-warning">Lista de Produtos</a>
-                <a href="?<?='id='.$id.'&adicionar='.$objEstoque->getProduto()->getIdProduto() ?>" class="btn btn-outline-success" <?=(!isset($estoque['qtd']) || $estoque['qtd'] < 1) ? 'hidden' : ''?>>Adicionar ao Carrinho</a>
+                <label for="qtd" <?= $total<1 ? 'hidden' : ''?> style = ' margin-left:70px;'>Adicionar ao carrinho:</label>
+                <input href="" type="number" name="qtd" id="" style='width:40px;' <?= $total<1 ? 'hidden' : ''?>>
+                <a style = 'margin:0px 15px;' href="?<?='id='.$id.'&adicionar='.$objEstoque->getProduto()->getIdProduto() ?>" class="btn btn-outline-success" <?= $total<1 ? 'hidden' : ''?>>Adicionar ao Carrinho</a>
             </div>
         </div>
 		</main>

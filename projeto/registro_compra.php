@@ -18,7 +18,9 @@
 			<h1>REGISTRO DE COMPRA</h1>
             <?php 
                 if(isset($_SESSION['carrinho'])) : 
-            $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";    
+			// $sql_code = "SELECT * FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto IN (";    
+			$sql_code = "" ;
+			$lista = [];
             ?>
 			<div class="table-responsive">
 				<table class = "table table-bordered align-middle">
@@ -36,7 +38,15 @@
 					<?php 
 						$totalCompra = 0;
                         foreach($_SESSION['carrinho'] as $key => $value) : 
-                            $sql_code = $sql_code.unserialize($value['obj'])->getProduto()->getIdProduto().",";
+							$idDoProduto = unserialize($value['obj'])->getProduto()->getIdProduto().",";
+							$sql_code = "SELECT idproduto, nome, (SELECT SUM(qtd) FROM estoque WHERE registro = 'ENTRADA' AND id_produto = '$idDoProduto') - (SELECT SUM(qtd) FROM estoque WHERE registro = 'SAÍDA' AND id_produto = '$idDoProduto') AS saldo FROM produtos LEFT JOIN estoque ON idproduto = id_produto WHERE idproduto = '$idDoProduto'";
+
+							// echo $sql_code;
+                        $sql_query = $conexao->query($sql_code);
+            
+                        if($sql_query->num_rows > 0){
+                            $lista[] = $sql_query->fetch_assoc();
+                        }
                     ?>
 					<tr>
 							<td><img width = "50" src="<?=unserialize($value['obj'])->getProduto()->getFoto()?>"></td>
@@ -57,7 +67,7 @@
 					</tr>
                     <?php 
                         endforeach;
-                        $sql_code = substr($sql_code, 0, (strlen($sql_code)-1)).');';
+                        // $sql_code = substr($sql_code, 0, (strlen($sql_code)-1)).');';
                     ?>
 					<tr>
 						<td colspan='7' style='text-align:right'><strong>TOTAL</strong></td>
@@ -67,7 +77,7 @@
 					<?php else: 
 								echo "<h3 style='text-align:center; margin-top:50px'>Carrinho vazio!</h3>";
                         endif;
-                        $podeRegistrar = true;
+                        $podeRegistrar = false;
                         $texto = 'Não possuímos o(s) produto(s) selecionado(s) em estoque: ';
                         $sql_query = $conexao->query($sql_code);
                         $lista = [];
@@ -76,15 +86,44 @@
                         }
                         foreach($lista as $registro){
                             $qtdSolicitada = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
-                            if(0 < $qtdSolicitada){
-                                $podeRegistrar = false;
-                                $texto = $texto.'\\n'.$qtdSolicitada.' - '.$registro['nome'];
+                            if($registro['qtd'] > $qtdSolicitada){
+                                $podeRegistrar = true;
                             }else{
-                                //SQL PARA REGISTRAR NAS 2 TABELAS (ESTOQUE E HISTORICO_COMPRA)
+                                $texto = $texto.'\\n'.$qtdSolicitada.' - '.$registro['nome'];
+                               
                             }
                         }
                         if($podeRegistrar){
-                            echo "<script> alert('REGISTRADO!');</script>";
+							echo "<script> alert('REGISTRADO!');</script>";
+							foreach($lista as $registro){
+								$qtdSolicitada = $_SESSION['carrinho'][$registro['idproduto']]['qtd'];
+								$idProduto = $registro['idproduto'];
+								$nomeProduto = $registro['nome'];
+								$tipo = $registro['tipo'];
+								$valor = $registro['valor_venda'];
+								$data = date('Y-m-d');
+
+								$sql_code2 = "INSERT INTO estoque VALUES (NULL, '$idProduto','$qtdSolicitada' , 'SAÍDA' , '$data' , null , '$valor')";
+								$sql_query2 = $conexao->query($sql_code2);
+								
+								if($sql_query2){
+									echo 'gravou!';
+								}else{
+									echo 'BOOWOMP';
+								}
+
+								$sql_code3 = "INSERT INTO historico_compra VALUES(NULL, '$id','$data','$idProduto','$nomeProduto','$tipo','$valor')";
+								$sql_query3 = $conexao->query($sql_code3);
+								
+								if($sql_query3){
+									echo 'gravou!';
+								}else{
+									echo 'BOOWOMP';
+								}
+
+							}
+							unset($_SESSION['carrinho']);
+							echo "<script>window.location.href='historico_compra.php';</script>";
                         }else{
                             echo "<script> alert('".$texto."');</script>";
                         }
